@@ -1,0 +1,4 @@
+*.ignore
+*.old
+*.DS_Store
+__pycache__/
