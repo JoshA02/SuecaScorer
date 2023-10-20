@@ -189,68 +189,11 @@ class Game:
             for k, v in playerPosToNum.items():
                 if(v == p): playerCards.append(trick.cards[k-1])
 
-            # print('Player ' + str(winningPlayerNum) + ' won trick ' + str(i + 1) + ' and is now in position 1') # Debugging
             playerPosToNum = {
                 1: winningPlayerNum,
                 2: 4 if (winningPlayerNum + 1) % 4 == 0 else (winningPlayerNum + 1) % 4,
                 3: 4 if (winningPlayerNum + 2) % 4 == 0 else (winningPlayerNum + 2) % 4,
                 4: 4 if (winningPlayerNum + 3) % 4 == 0 else (winningPlayerNum + 3) % 4
             }
-
-        # for(i, trick) in enumerate(self.tricks):
-        #     winningPlayerNum = self.playerNumberFromPosition(trick.trick_winner(self.trumpCard.suit), i + 1)
-        #     # print('Player ' + str(winningPlayerNum) + ' won trick ' + str(i + 1) + ' and is now in position 1') # Debugging
-            
-        #     ourPlayerPosition = self.playerPositionFromNumber(p, i + 1)
-            
-        #     playerCards.append(trick.cards[ourPlayerPosition - 1])
-        #     # print('Our player: ' + str(p) + ' is in position ' + str(ourPlayerPosition)) # Debugging
             
         return playerCards
-
-
-
-# newGame = Game(parseCard('7D'))
-# newGame.playTrick(parseTrick('AH 2D 5H 2H'))
-# newGame.playTrick(parseTrick('AC 3D 4C KC'))
-# # print(newGame.getTrickDictionary(2))
-# newGame.playTrick(parseTrick('AS 2S 4S 3S'))
-# newGame.playTrick(parseTrick('AD 4H QD 6D'))
-# newGame.playTrick(parseTrick('4D 7S 3H JD'))
-# newGame.playTrick(parseTrick('7D 5D 7C 3C'))
-# # newGame.playTrick(parseTrick('5D 7D 7C 3C')) # This is the trick that will cause the error
-# newGame.playTrick(parseTrick('KS KD QS 5S'))
-# newGame.playTrick(parseTrick('7H QC QH 2C'))
-# newGame.playTrick(parseTrick('JH JC KH 6C'))
-# newGame.playTrick(parseTrick('5C 6S 6H JS'))
-# playerCards = newGame.cardsOf(1)
-# for(card) in playerCards:
-#     print(card.show())
-
-# try:
-#     g = Game(parseCard("JS"))
-#     assert(g.gameTrump().show() == 'JS')
-#     assert(g.score() == (0, 0))
-#     tc, ts = parseGameFile('game_data/game1.sueca')
-#     g = Game(tc)
-#     assert(g.gameTrump().show() == '7D')
-#     assert(g.score() == (0, 0))
-#     g.playTrick(ts[0])
-#     assert(g.score() == (0, 11))
-#     assert(g.cardsOf(1)[0].show() == 'AH')
-#     assert(g.cardsOf(2)[0].show() == '2D')
-#     # print(g.cardsOf(5)[0].show())
-#     # ValueError: Invalid player number 5
-#     assert(g.gameTricks()[0].show() == 'AH 2D 5H 2H')
-#     g.playTrick(ts[1])
-#     assert(g.score() == (15, 11))
-#     for t in ts[2:]:
-#         g.playTrick(t)
-#     assert(g.score() == (76, 44))
-#     assert(g.gameTricks()[-1].show() == '5C 6S 6H JS')
-#     assert(g.cardsOf(1)[-1].show() == '5C')
-#     assert(g.cardsOf(2)[-1].show() == '6S')
-# except AssertionError as e:
-#     print('Tests Failed')
-# else:
-#     print('All tests passed')

@@ -11,8 +11,6 @@ class Card:
         # print('Card created: ' + self.rank + self.suit)
 
     def points(self):
-        # points: int = rank_points(self.rank)
-        # if(points <= 0): return (self.show())
         return rank_points(self.rank)
 
     def higher_than(self: 'Card', other: 'Card', s: str, t: str) -> bool:
@@ -44,7 +42,6 @@ class Card:
 
 # Examples: 'AH' or '2C' or '7D' or 'QS'
 def parseCard(cs: str) -> Card:
-    # cs = cs.upper()
     defaultError: str = "Card '" + cs + "' is invalid!"
 
     if(len(cs) != 2):

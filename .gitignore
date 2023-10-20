@@ -1,4 +1,5 @@
 *.ignore
 *.old
 *.DS_Store
+/game_data/gameinfo.txt
 __pycache__/

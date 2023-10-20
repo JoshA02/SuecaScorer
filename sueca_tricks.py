@@ -22,10 +22,6 @@ class Trick:
 
         if(not valid_suit(trumpSuit)): raise ValueError('Invalid trump suit ' + trumpSuit)
 
-        # TODO: Implement this function
-        # Returns the index of the winning player (1-4; in the order the cards were played)
-        # E.g) AH, 2D, 5H, 2H. If trump card is diamonds ('D'), 2D wins, which is the second player. So, the function should return 2
-
         leadSuit: str = self.cards[0].suit.upper() # The lead suit is the suit of the first card played
 
         validCards = list(filter( (lambda c: (c.suit == leadSuit) or (c.suit == trumpSuit)), self.cards )) # Filter out all cards that are not of the lead suit or the trump suit
@@ -55,9 +51,3 @@ def parseGameFile(fname: str) -> Tuple[Card, List[Trick]]:
         trump = lines[0].strip() # Returns the first line of the file with any leading and trailing whitespace removed
         tricks = [parseTrick(l.strip()) for l in lines[1:]] # Returns all lines after the first line of the file with any leading and trailing whitespace removed
         return (parseCard(trump), tricks)
-
-# tc, ts = parseGameFile('game_data/game1.sueca')
-# print(
-    # For testing purposes
-    # ts[-1].show()
-# )

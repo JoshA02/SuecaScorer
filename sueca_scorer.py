@@ -1,5 +1,6 @@
 from sueca_suits_ranks import suit_full_name
 from os.path import exists
+from sys import argv
 import sueca_tricks
 from sueca_games import Game
 
@@ -9,6 +10,41 @@ class GameFileCouldNotBeFound(Exception):
 class SuecaGameIncomplete(Exception):
     pass
 
+
+### Intro Logic
+def __main__():
+    if len(argv) <= 1:
+        userFriendlyRunGame()
+        return
+    
+    # Convert all arguments to lowercase
+    for i, v in enumerate(argv):
+        argv[i] = v.lower()
+
+    showCards = False if '-c' not in argv else True
+    showGame = False if '-g' not in argv else True
+    fname = 'game_data/' + formatFileName(argv[len(argv) - 1])
+
+    runGame(fname, showCards, showGame)
+
+def formatFileName(fname: str):
+    if(not fname.endswith('.sueca')): fname += '.sueca'
+    return fname
+
+def userFriendlyRunGame():
+    print('Welcome to Sueca Scorer!')
+    fname = input("Enter the name of the file with the game data (must be within the 'game_data' folder): ")
+    fpath = 'game_data/' + formatFileName(fname)
+
+    # Check if file exists; if not, display user-friendly error message and exit:
+    if(not exists(fpath)):
+        print("Could not find the game file '" + fname + "'\nMake sure the file is within the 'game_data' folder.\nExiting...")
+        return
+    
+    runGame(fpath, showCards=True, showGame=True)
+
+
+### Game Logic
 def runGame(fname: str, showCards: bool = False, showGame: bool = False):
     if(not exists(fname)): raise GameFileCouldNotBeFound("Could not find the game file '" + fname + "'")
     
@@ -42,7 +78,5 @@ def runGame(fname: str, showCards: bool = False, showGame: bool = False):
         for i, trick in enumerate(game.tricks):
             print(str(i+1) + ': ' + trick.show())
 
-
-
-
-runGame('game_data/game1.sueca', showCards=True, showGame=True)
+if __name__ == "__main__":
+    __main__()
